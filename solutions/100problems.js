@@ -2,6 +2,7 @@ multiples(1000);
 fibonacci(4000000);
 largestPrime(600851475143);
 largestPalindrome();
+smallestMultiple(20);
 
 function addToPage(message, result){
 	var resultDIV = '<li class="result">MESSAGE : <b>RESULT</b></li>';
@@ -47,7 +48,7 @@ function largestPrime(number){
 	var numberCanBeDivided = true;
 	i=0;
 
-	console.time("cycleTime");
+	console.time("largestPrime");
 	while (numberCanBeDivided) {
 		if (number >= 2) numberCanBeDivided = true;
 		else numberCanBeDivided = false;
@@ -64,15 +65,43 @@ function largestPrime(number){
 		}
 		else i++;
 	}
-	console.timeEnd("cycleTime");
+	console.timeEnd("largestPrime");
 	var result = Math.max(...primeNumbersOfCurrentNumber);
-	console.log(primeNumbersOfCurrentNumber);
+	//console.log(primeNumbersOfCurrentNumber);
 
 	addToPage('Largest prime factor of 600851475143', result || 'Working on it...');
 }
 
 function largestPalindrome(){	
+	var a = 999;
+	var possiblePalindrome;
+	var palindromes = [];
 	var result = 0;
 
+	console.time('largestPalindrome');
+	while (a>0){
+		if (JSON.stringify(a).length<3) break;
+		for (i=999;i>0;i--) {
+			if (JSON.stringify(i).length<3) break;
+			if (a*i < Math.max(...palindromes)) break;
+			possiblePalindrome = JSON.stringify(a*i);
+			var leftSide = possiblePalindrome.substring(0, 3);
+			var rightSide = possiblePalindrome.substring(3).split("").reverse().join("");
+			if (leftSide === rightSide) {
+				palindromes.push(possiblePalindrome);
+				break;
+			}
+		}
+		a--;
+	}
+	console.timeEnd('largestPalindrome');
+
+	result=Math.max(...palindromes);
 	addToPage('Largest palindrome of 3-digit numbers', result || 'Working on it...');
+}
+
+function smallestMultiple(number) {
+	
+	var result;
+	addToPage('smallest positive number that is evenly divisible by all of the numbers from 1 to 20', result || 'Working on it...');
 }
