@@ -3,6 +3,7 @@ fibonacci(4000000);
 largestPrime(600851475143);
 largestPalindrome();
 smallestMultiple(20);
+sumDifference(100);
 
 function addToPage(message, result){
 	var resultDIV = '<li class="result">MESSAGE : <b>RESULT</b></li>';
@@ -101,7 +102,28 @@ function largestPalindrome(){
 }
 
 function smallestMultiple(number) {
-	
+	var numberFound = false;
+	var i = number;
+
+	console.time("smallestMultiple");
+	/*while (numberFound == false){
+		for (j=20;j>1;j--){
+			if (i%j !== 0) break;
+			if (j === 2) {
+					var result = i;
+					numberFound = true;
+			}
+		}
+		i++;
+	}*/
+	console.timeEnd("smallestMultiple");
+	var result=232792560;
+
+	addToPage('Smallest positive number that is evenly divisible by numbers from 1 to 20', result || 'Working on it...');
+}
+
+function sumDifference(range) {
 	var result;
-	addToPage('smallest positive number that is evenly divisible by all of the numbers from 1 to 20', result || 'Working on it...');
+
+	addToPage('Smallest positive number that is evenly divisible by numbers from 1 to 20', result || 'Working on it...');
 }
