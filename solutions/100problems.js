@@ -4,6 +4,7 @@ largestPrime(600851475143);
 largestPalindrome();
 smallestMultiple(20);
 sumDifference(100);
+primeNumbers(10001);
 
 function addToPage(message, result){
 	var resultDIV = '<li class="result">MESSAGE : <b>RESULT</b></li>';
@@ -124,6 +125,49 @@ function smallestMultiple(number) {
 
 function sumDifference(range) {
 	var result;
+	var sumOfSquares = 0;
+	var squareOfSum = 0;
 
-	addToPage('Smallest positive number that is evenly divisible by numbers from 1 to 20', result || 'Working on it...');
+	console.time("SumSquare");
+	for (i=1;i<=range;i++){
+		squareOfSum+=i;
+		sumOfSquares+=i*i;
+	}
+	squareOfSum = squareOfSum*squareOfSum;
+	console.timeEnd("SumSquare");
+	result = squareOfSum - sumOfSquares;
+
+	addToPage('Difference between the sum of the squares of the first 100 natural numbers and the square of the sum:', result || 'Working on it...');
+}
+
+function primeNumbers(position){
+	var result;
+	var primeNumber;
+	var primeNumbers = [];
+
+	console.time('PrimeNumbers');// Find first 1000 prime numbers and store them
+	var firstThousand = [];
+	for (i=2;i<=1000;i++){
+		for (j=2;j<=i;j++){
+			if (j != i && i%j == 0) break;
+			if (j == i && i%j == 0) {
+				firstThousand.push(j);
+				primeNumbers.push(j);
+			}
+		}
+	}
+
+	i=1001
+	while(primeNumbers.length<position){
+		for (index=0;index<firstThousand.length;index++){
+			if (i%firstThousand[index] == 0) break;
+			if (index == firstThousand.length-1) primeNumbers.push(i);
+		}
+	i++;
+	}
+
+	console.timeEnd('PrimeNumbers');
+	result = primeNumbers[position-1];
+
+	addToPage('10001st prime number:', result || 'Working on it...');
 }
